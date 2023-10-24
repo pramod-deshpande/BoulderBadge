@@ -1,17 +1,77 @@
 ﻿@inherits LayoutComponentBase
 
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
+<MudThemeProvider Theme="CustomTheme" IsDarkMode="@_isDarkMode" />
+<MudDialogProvider />
+<MudSnackbarProvider />
 
-    <main>
-        <div class="top-row px-4">
-            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
-        </div>
+<MudLayout>
+    <MudToolBar>
+        <a href="/"><MudText Typo="Typo.h5" Color="Color.Primary"> <MudIcon Icon="@Constant.KuroPurpleSVG"></MudIcon> </MudText></a>
+        <MudSpacer />
+        <MudToggleIconButton @bind-Toggled="@_isDarkMode"
+                             Icon="@Icons.Material.Outlined.DarkMode" Color="@Color.Dark" Title="Off"
+                             ToggledIcon="@Icons.Material.Outlined.LightMode" ToggledColor="Color.Warning" ToggledTitle="On" />
+    </MudToolBar>
+    <MudAppBar Bottom Fixed Class="border-double border-t mud-border-secondary">
+         <NavMenu />
+     </MudAppBar>
+     <MudMainContent Class="pt-1">
+         <div style="margin:0px; flex: 1 1 auto; padding-bottom: calc(var(--mud-appbar-height) - var(--mud-appbar-height)/8); transition: margin 225ms cubic-bezier(0,0,.2,1) 0ms;">
+             <MudContainer MaxWidth="MaxWidth.Medium" Class="pb-16">
+                 @Body
+             </MudContainer>
+         </div>
+     </MudMainContent>
+ </MudLayout>
 
-        <article class="content px-4">
-            @Body
-        </article>
-    </main>
-</div>
+
+ @code {
+
+    private bool _isDarkMode;
+
+    MudTheme CustomTheme = new MudTheme()
+        {
+
+            Typography = new Typography()
+            {
+                Default = new Default()
+                {
+                    FontFamily = new[] { "Ubuntu", "sans-serif" }
+                },
+            },
+            PaletteDark = new PaletteDark()
+            {
+
+                Background = "#202124",
+                Surface = "#161b22",
+                AppbarBackground = "#161b22",
+
+                Primary = "#809A6F",
+                PrimaryLighten = "#B3CDA2",
+                PrimaryDarken = "#4D673C",
+
+                Secondary = "#896F9A",
+                SecondaryLighten = "#BCA2CD",
+                SecondaryDarken = "#563C67",
+
+            },
+            Palette = new PaletteLight()
+            {
+                Primary = "#809A6F",
+                PrimaryLighten = "#B3CDA2",
+                PrimaryDarken = "#4D673C",
+
+                Secondary = "#896F9A",
+                SecondaryLighten = "#BCA2CD",
+                SecondaryDarken = "#563C67",
+
+                Background = "#f6f4f6",
+                Surface = "#f7f7f7",
+                AppbarBackground = "#f7f7f7",
+                //F6F6F6
+
+            }
+        };
+
+
+}

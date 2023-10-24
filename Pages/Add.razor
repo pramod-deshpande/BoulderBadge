@@ -1,0 +1,27 @@
+﻿@page "/add"
+@using BoulderBadge.Data
+
+<CustomHeading Title="Habit"></CustomHeading>
+
+
+<EditForm Model="habit">
+    <MudGrid Spacing="4" Justify="Justify.Center">
+        <MudItem xs="12" sm="12" md="12" lg="12">
+            <MudTextField Variant=Variant.Outlined Label="Title" @bind-Value="@habit.Title" />
+        </MudItem>
+        <MudItem xs="12" sm="12" md="12" lg="12">
+            <MudNumericField @bind-Value="habit.Duration" Label="Duration(days)" Variant="Variant.Outlined" Min="0" />
+        </MudItem>
+        <MudItem xs="12" sm="12" md="12" lg="12">
+            <MudDatePicker PickerVariant="PickerVariant.Dialog" Label="Start date" Variant="Variant.Outlined" @bind-Date="habit.StartDate" DisableToolbar="true" />
+        </MudItem>
+        <MudItem>
+            <MudButton Class="px-3 py-2 rounded border-2 border-solid"><MudText Typo="Typo.subtitle1">Submit</MudText></MudButton>
+        </MudItem>
+    </MudGrid>
+</EditForm>
+
+
+@code {
+    Habit habit = new();
+}

@@ -1,29 +1,29 @@
 ﻿using Microsoft.Extensions.Logging;
+using MudBlazor.Services;
 
-namespace BoulderBadge
+namespace BoulderBadge;
+
+public static class MauiProgram
 {
-    public static class MauiProgram
+    public static MauiApp CreateMauiApp()
     {
-        public static MauiApp CreateMauiApp()
-        {
-            var builder = MauiApp.CreateBuilder();
-            builder
-                .UseMauiApp<App>()
-                .ConfigureFonts(fonts =>
-                {
-                    fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-                });
+        var builder = MauiApp.CreateBuilder();
+        builder
+            .UseMauiApp<App>()
+            .ConfigureFonts(fonts =>
+            {
+                fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+            });
 
-            builder.Services.AddMauiBlazorWebView();
+        builder.Services.AddMauiBlazorWebView();
 
 #if DEBUG
-            builder.Services.AddBlazorWebViewDeveloperTools();
-            builder.Logging.AddDebug();
+        builder.Services.AddBlazorWebViewDeveloperTools();
+        builder.Logging.AddDebug();
 #endif
 
+        builder.Services.AddMudServices();
 
-
-            return builder.Build();
-        }
+        return builder.Build();
     }
 }
